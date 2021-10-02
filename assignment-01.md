@@ -5,67 +5,46 @@
 **Name:**_________________________
 
 
-In this assignment, you will learn more about asymptotic notation, parallelism, functional languages, and algorithmic cost models. As in the recitation, some of your answer will go here and some will go in `main.py`. You are welcome to edit this `assignment-01.md` file directly, or print and fill in by hand. If you do the latter, please scan to a file `assignment-01.pdf` and push to your github repository. 
-  
-  
+In this assignment, you will learn more about asymptotic notation, parallelism, functional languages, and algorithmic cost models. As in the recitation, some of your answer will go here and some will go in `main.py`. You are welcome to edit this `assignment-01.md` file directly, or print and fill in by hand. If you do the latter, please scan to a file `assignment-01.pdf` and push to your github repository.
+
+
 
 1. **Asymptotic notation**
 
-  - 1a. Is $2^{n+1} \in O(2^n)$? Why or why not? 
-.  
-.  
-.  
-.  
-. 
+  - 1a. Is $2^{n+1} \in O(2^n)$? Why or why not?
+.  Yes, when graphed it can be seen that $2^{n+1} stays within O(2^n)$. 2^n+1 = 2 * 2^n, and we can add a constant (C) so that C * 2^n
+
+
   - 1b. Is $2^{2^n} \in O(2^n)$? Why or why not?     
-.  
-.  
-.  
-.  
-.  
-  - 1c. Is $n^{1.01} \in O(\mathrm{log}^2 n)$?    
-.  
-.  
-.  
-.  
+No it is not, as the runtime of 2^2^n would be increasing at a greater
+rate when compared to 2^n as n is increasing.
+
+  - 1c. Is $n^{1.01} \in O(\mathrm{log}^2 n)$?   
+
+    NO
 
   - 1d. Is $n^{1.01} \in \Omega(\mathrm{log}^2 n)$?  
-.  
-.  
-.  
-.  
+
+    YES
+
   - 1e. Is $\sqrt{n} \in O((\mathrm{log} n)^3)$?  
-.  
-.  
-.  
-.  
-  - 1f. Is $\sqrt{n} \in \Omega((\mathrm{log} n)^3)$?  
-.  
-.  
-.  
-.  
+
+    YES
+
+  - 1f. Is $\sqrt{n} \in \Omega((\mathrm{log} n)^3)$?
+
+    NO
 
   - 1g. Consider the definition of "Little o" notation:
-  
+
 $g(n) \in o(f(n))$ means that for **every** positive constant $c$, there exists a constant $n_0$ such that $g(n) \le c \cdot f(n)$ for all $n \ge n_0$. There is an analogous definition for "little omega" $\omega(f(n))$. The distinction between $o(f(n))$ and $O(f(n))$ is that the former requires the condition to be met for **every** $c$, not just for some $c$. For example, $10x \in o(x^2)$, but $10x^2 \notin o(x^2)$.  
 
 .  
 
 **Prove** that $o(g(n)) \cap \omega(g(n))$ is the empty set.  
-
-.  
-.  
-.  
-.  
-.  
-.  
-.  
-.  
-.  
-.  
-.  
-.  
-
+If f(n) is in both o(g(n)) and w(g(n)) then f(n) <= c * g(n) and fn >= c * g(n).
+This means that for values of c greater than 0, c * g(n) < f(n) < c * g(n) which would not work.
+Thus, $o(g(n)) /\ (g(n))$ is the empty set.
 
 
 2. **SPARC to Python**
@@ -81,20 +60,13 @@ $$
 ~~~~~~~~~~~~ra + rb\\  
 ~~~~~~~~\texttt{end}{}.\\
 \end{array}
-$$ 
+$$
 
   - 2a. Translate this to Python code -- fill in the `def foo` method in `main.py`  
 
   - 2b. What does this function do, in your own words?  
 
-.  
-.  
-.  
-.  
-.  
-.  
-  
-
+The recursive function essentially adds the returned value of the previous two functions. For instance, because foo(2) = 1, and foo(3)=2, foo(4) = 1 + 2 = 3, and foo(5) = 3 + 2 = 5, and so on.
 
 3. **Parallelism and recursion**
 
@@ -111,46 +83,22 @@ def longest_run(myarray, key)
    """
 ```
 E.g., `longest_run([2,12,12,8,12,12,12,0,12,1], 12) == 3`  
- 
+
   - 3a. First, implement an iterative, sequential version of `longest_run` in `main.py`.  
 
   - 3b. What is the Work and Span of this implementation?  
-
-.  
-.  
-.  
-.  
-.  
-.  
-.  
-.  
-.  
-
+    work --> O(n)
+    span --> O(n)
 
   - 3c. Next, implement a `longest_run_recursive`, a recursive, divide and conquer implementation. This is analogous to our implementation of `sum_list_recursive`. To do so, you will need to think about how to combine partial solutions from each recursive call. Make use of the provided class `Result`.   
 
   - 3d. What is the Work and Span of this sequential algorithm?  
-.  
-.  
-.  
-.  
-.  
-.  
-.  
-.  
-.  
-.  
-.  
+    work --> O(n)
+    span --> O(n)
+
 
 
   - 3e. Assume that we parallelize in a similar way we did with `sum_list_recursive`. That is, each recursive call spawns a new thread. What is the Work and Span of this algorithm?  
 
-.  
-.  
-.  
-.  
-.  
-.  
-.  
-.  
-
+    work --> O(n)
+    span --> O(log(n))
